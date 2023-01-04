@@ -1,0 +1,1513 @@
+Microsoft Windows [Version 10.0.19045.2364]
+(c) Microsoft Corporation. All rights reserved.
+                                                                                                                        C:\WINDOWS\system32>bash                                                                                                'bash' is not recognized as an internal or external command,                                                            operable program or batch file.                                                                                                                                                                                                                 C:\WINDOWS\system32>@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+Forcing web requests to allow TLS v1.2 (Required for requests to Chocolatey.org)
+Getting latest version of the Chocolatey package for download.
+Not using proxy.
+Getting Chocolatey from https://community.chocolatey.org/api/v2/package/chocolatey/1.2.1.
+Downloading https://community.chocolatey.org/api/v2/package/chocolatey/1.2.1 to C:\Users\bhara\AppData\Local\Temp\chocolatey\chocoInstall\chocolatey.zip
+Not using proxy.
+Extracting C:\Users\bhara\AppData\Local\Temp\chocolatey\chocoInstall\chocolatey.zip to C:\Users\bhara\AppData\Local\Temp\chocolatey\chocoInstall
+Installing Chocolatey on the local machine
+Creating ChocolateyInstall as an environment variable (targeting 'Machine')
+  Setting ChocolateyInstall to 'C:\ProgramData\chocolatey'
+WARNING: It's very likely you will need to close and reopen your shell
+  before you can use choco.
+Restricting write permissions to Administrators
+We are setting up the Chocolatey package repository.
+The packages themselves go to 'C:\ProgramData\chocolatey\lib'
+  (i.e. C:\ProgramData\chocolatey\lib\yourPackageName).
+A shim file for the command line goes to 'C:\ProgramData\chocolatey\bin'
+  and points to an executable in 'C:\ProgramData\chocolatey\lib\yourPackageName'.
+
+Creating Chocolatey folders if they do not already exist.
+
+WARNING: You can safely ignore errors related to missing log files when
+  upgrading from a version of Chocolatey less than 0.9.9.
+  'Batch file could not be found' is also safe to ignore.
+  'The system cannot find the file specified' - also safe.
+chocolatey.nupkg file not installed in lib.
+ Attempting to locate it from bootstrapper.
+PATH environment variable does not have C:\ProgramData\chocolatey\bin in it. Adding...
+WARNING: Not setting tab completion: Profile file does not exist at
+'C:\Users\bhara\OneDrive\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1'.
+Chocolatey (choco.exe) is now ready.
+You can call choco from anywhere, command line or powershell by typing choco.
+Run choco /? for a list of functions.
+You may need to shut down and restart powershell and/or consoles
+ first prior to using choco.
+Ensuring Chocolatey commands are on the path
+Ensuring chocolatey.nupkg is in the lib folder
+
+C:\WINDOWS\system32>choco /?
+This is a listing of all of the different things you can pass to choco.
+
+DEPRECATION NOTICE
+
+The shims `chocolatey`, `cinst`, `clist`, `cpush`, `cuninst` and `cup` are deprecated.
+We recommend updating all scripts to use their full command equivalent as these will be
+removed in v2.0.0 of Chocolatey.
+
+Options and Switches
+
+ -v, --version
+     Version - Prints out the Chocolatey version. Available in 0.9.9+.
+
+Commands
+
+ * apikey - retrieves, saves or deletes an apikey for a particular source
+ * config - Retrieve and configure config file settings
+ * export - exports list of currently installed packages
+ * feature - view and configure choco features
+ * features - view and configure choco features (alias for feature)
+ * find - searches remote or local packages (alias for search)
+ * help - displays top level help information for choco
+ * info - retrieves package information. Shorthand for choco search pkgname --exact --verbose
+ * install - installs packages using configured sources
+ * list - lists remote or local packages
+ * new - creates template files for creating a new Chocolatey package
+ * outdated - retrieves information about packages that are outdated. Similar to upgrade all --noop
+ * pack - packages nuspec, scripts, and other Chocolatey package resources into a nupkg file
+ * pin - suppress upgrades for a package
+ * push - pushes a compiled nupkg to a source
+ * search - searches remote or local packages
+ * setapikey - retrieves, saves or deletes an apikey for a particular source (alias for apikey)
+ * source - view and configure default sources
+ * sources - view and configure default sources (alias for source)
+ * template - get information about installed templates
+ * templates - get information about installed templates (alias for template)
+ * uninstall - uninstalls a package
+ * unpackself - re-installs Chocolatey base files
+ * upgrade - upgrades packages from various sources
+
+
+Please run chocolatey with `choco command -help` for specific help on
+ each command.
+
+How To Pass Options / Switches
+
+You can pass options and switches in the following ways:
+
+ * Unless stated otherwise, an option/switch should only be passed one
+   time. Otherwise you may find weird/non-supported behavior.
+ * `-`, `/`, or `--` (one character switches should not use `--`)
+ * **Option Bundling / Bundled Options**: One character switches can be
+   bundled. e.g. `-d` (debug), `-f` (force), `-v` (verbose), and `-y`
+   (confirm yes) can be bundled as `-dfvy`.
+ * NOTE: If `debug` or `verbose` are bundled with local options
+   (not the global ones above), some logging may not show up until after
+   the local options are parsed.
+ * **Use Equals**: You can also include or not include an equals sign
+   `=` between options and values.
+ * **Quote Values**: When you need to quote an entire argument, such as
+   when using spaces, please use a combination of double quotes and
+   apostrophes (`"'value'"`). In cmd.exe you can just use double quotes
+   (`"value"`) but in powershell.exe you should use backticks
+   (`` `"value`" ``) or apostrophes (`'value'`). Using the combination
+   allows for both shells to work without issue, except for when the next
+   section applies.
+ * **Pass quotes in arguments**: When you need to pass quoted values to
+   to something like a native installer, you are in for a world of fun. In
+   cmd.exe you must pass it like this: `-ia "/yo=""Spaces spaces"""`. In
+   PowerShell.exe, you must pass it like this: `-ia '/yo=""Spaces spaces""'`.
+   No other combination will work. In PowerShell.exe if you are on version
+   v3+, you can try `--%` before `-ia` to just pass the args through as is,
+   which means it should not require any special workarounds.
+ * **Periods in PowerShell**: If you need to pass a period as part of a
+   value or a path, PowerShell doesn't always handle it well. Please
+   quote those values using "Quote Values" section above.
+ * Options and switches apply to all items passed, so if you are
+   installing multiple packages, and you use `--version=1.0.0`, choco
+   is going to look for and try to install version 1.0.0 of every
+   package passed. So please split out multiple package calls when
+   wanting to pass specific options.
+
+Scripting / Integration - Best Practices / Style Guide
+
+When writing scripts, such as PowerShell scripts passing options and
+switches, there are some best practices to follow to ensure that you
+don't run into issues later. This also applies to integrations that
+are calling Chocolatey and parsing output. Chocolatey **uses**
+PowerShell, but it is an exe, so it cannot return PowerShell objects.
+
+Following these practices ensures both readability of your scripts AND
+compatibility across different versions and editions of Chocolatey.
+Following this guide will ensure your experience is not frustrating
+based on choco not receiving things you think you are passing to it.
+
+ * For consistency, always use `choco`, not `choco.exe`. Never use
+   shortcut commands like `cinst` or `cup` (The shortcuts `cinst`
+   and `cup` will be removed in v2.0.0).
+ * Always have the command as the first argument to `choco`. e.g.
+   `choco install`, where `install` is the command.
+ * If there is a subcommand, ensure that is the second argument. e.g.
+   `choco source list`, where `source` is the command and `list` is the
+   subcommand.
+ * Typically the subject comes next. If installing packages, the
+   subject would be the package names, e.g. `choco install pkg1 pkg2`.
+ * Never use 'nupkg' or point directly to a nupkg file UNLESS using
+   'choco push'. Use the source folder instead, e.g. `choco install
+   <package id> --source="'c:\folder\with\package'"` instead of
+   `choco install DoNotDoThis.1.0.nupkg` or `choco install DoNotDoThis
+    --source="'c:\folder\with\package\DoNotDoThis.1.0.nupkg'"`.
+ * Switches and parameters are called simply options. Options come
+   after the subject. e.g. `choco install pkg1 --debug --verbose`.
+ * Never use the force option (`--force`/`-f`) in scripts (or really
+   otherwise as a default mode of use). Force is an override on
+   Chocolatey behavior. If you are wondering why Chocolatey isn't doing
+   something like the documentation says it should, it's likely because
+   you are using force. Stop.
+ * Always use full option name. If the short option is `-n`, and the
+   full option is `--name`, use `--name`. The only acceptable short
+   option for use in scripts is `-y`. Find option names in help docs
+   online or through `choco -?` /`choco [Command Name] -?`.
+ * For scripts that are running automated, always use `-y`. Do note
+   that even with `-y` passed, some things / state issues detected will
+   temporarily stop for input - the key here is temporarily. They will
+   continue without requiring any action after the temporary timeout
+   (typically 30 seconds).
+ * Full option names are prepended with two dashes, e.g. `--` or
+   `--debug --verbose --ignore-proxy`.
+ * When setting a value to an option, always put an equals (`=`)
+   between the name and the setting, e.g. `--source="'local'"`.
+ * When setting a value to an option, always surround the value
+   properly with double quotes bookending apostrophes, e.g.
+   `--source="'internal_server'"`.
+ * If you are building PowerShell scripts, you can most likely just
+   simply use apostrophes surrounding option values, e.g.
+   `--source='internal_server'`.
+ * Prefer upgrade to install in scripts. You can't `install` to a newer
+   version of something, but you can `choco upgrade` which will do both
+   upgrade or install (unless switched off explicitly).
+ * If you are sharing the script with others, pass `--source` to be
+   explicit about where the package is coming from. Use full link and
+   not source name ('https://community.chocolatey.org/api/v2' versus
+   'chocolatey').
+ * If parsing output, you might want to use `--limit-output`/`-r` to
+   get output in a more machine parseable format. NOTE: Not all
+   commands handle return of information in an easily digestible
+   output.
+ * Use exit codes to determine status. Chocolatey exits with 0 when
+   everything worked appropriately and other exits codes like 1 when
+   things error. There are package specific exit codes that are
+   recommended to be used and reboot indicating exit codes as well. To
+   check exit code when using PowerShell, immediately call
+   `$exitCode = $LASTEXITCODE` to get the value choco exited with.
+
+Here's an example following bad practices (line breaks added for
+ readability):
+
+  `choco install pkg1 -y -params '/Option:Value /Option2:value with
+   spaces' --c4b-option 'Yaass' --option-that-is-new 'dude upgrade'`
+
+Now here is that example written with best practices (again line
+ breaks added for readability - there are not line continuations
+ for choco):
+
+  `choco upgrade pkg1 -y --source="'https://community.chocolatey.org/api/v2'"
+   --package-parameters="'/Option:Value /Option2:value with spaces'"
+   --c4b-option="'Yaass'" --option-that-is-new="'dude upgrade'"`
+
+Note the differences between the two:
+ * Which is more self-documenting?
+ * Which will allow for the newest version of something installed or
+   upgraded to (which allows for more environmental consistency on
+   packages and versions)?
+ * Which may throw an error on a badly passed option?
+ * Which will throw errors on unknown option values? See explanation
+   below.
+
+Chocolatey ignores options it doesn't understand, but it can only
+ ignore option values if they are tied to the option with an
+ equals sign ('='). Note those last two options in the examples above?
+ If you roll off of a commercial edition or someone with older version
+ attempts to run the badly crafted script `--c4b-option 'Yaass'
+ --option-that-is-new 'dude upgrade'`, they are likely to see errors on
+ 'Yaass' and 'dude upgrade' because they are not explicitly tied to the
+ option they are written after. Now compare that to the other script.
+ Choco will ignore `--c4b-option="'Yaass'"` and
+ `--option-that-is-new="'dude upgrade'"` as a whole when it doesn't
+ register the options. This means that your script doesn't error.
+
+Following these scripting best practices will ensure your scripts work
+ everywhere they are used and with newer versions of Chocolatey.
+
+
+Default Options and Switches
+
+ -?, --help, -h
+     Prints out the help menu.
+
+ -d, --debug
+     Debug - Show debug messaging.
+
+ -v, --verbose
+     Verbose - Show verbose messaging. Very verbose messaging, avoid using
+       under normal circumstances.
+
+     --trace
+     Trace - Show trace messaging. Very, very verbose trace messaging. Avoid
+       except when needing super low-level .NET Framework debugging. Available
+       in 0.10.4+.
+
+     --nocolor, --no-color
+     No Color - Do not show colorization in logging output. This overrides
+       the feature 'logWithoutColor', set to 'False'. Available in 0.10.9+.
+
+     --acceptlicense, --accept-license
+     AcceptLicense - Accept license dialogs automatically. Reserved for
+       future use.
+
+ -y, --yes, --confirm
+     Confirm all prompts - Chooses affirmative answer instead of prompting.
+       Implies --accept-license
+
+ -f, --force
+     Force - force the behavior. Do not use force during normal operation -
+       it subverts some of the smart behavior for commands.
+
+     --noop, --whatif, --what-if
+     NoOp / WhatIf - Don't actually do anything.
+
+ -r, --limitoutput, --limit-output
+     LimitOutput - Limit the output to essential information
+
+     --timeout, --execution-timeout=VALUE
+     CommandExecutionTimeout (in seconds) - The time to allow a command to
+       finish before timing out. Overrides the default execution timeout in the
+       configuration of 2700 seconds. '0' for infinite starting in 0.10.4.
+
+ -c, --cache, --cachelocation, --cache-location=VALUE
+     CacheLocation - Location for download cache, defaults to %TEMP% or value
+       in chocolatey.config file.
+
+     --allowunofficial, --allow-unofficial, --allowunofficialbuild, --allow-unofficial-build
+     AllowUnofficialBuild - When not using the official build you must set
+       this flag for choco to continue.
+
+     --failstderr, --failonstderr, --fail-on-stderr, --fail-on-standard-error, --fail-on-error-output
+     FailOnStandardError - Fail on standard error output (stderr), typically
+       received when running external commands during install providers. This
+       overrides the feature failOnStandardError.
+
+     --use-system-powershell
+     UseSystemPowerShell - Execute PowerShell using an external process
+       instead of the built-in PowerShell host. Should only be used when
+       internal host is failing. Available in 0.9.10+.
+
+     --no-progress
+     Do Not Show Progress - Do not show download progress percentages.
+       Available in 0.10.4+.
+
+     --proxy=VALUE
+     Proxy Location - Explicit proxy location. Overrides the default proxy
+       location of ''. Available for config settings in 0.9.9.9+, this CLI
+       option available in 0.10.4+.
+
+     --proxy-user=VALUE
+     Proxy User Name - Explicit proxy user (optional). Requires explicit
+       proxy (`--proxy` or config setting). Overrides the default proxy user of
+       ''. Available for config settings in 0.9.9.9+, this CLI option available
+       in 0.10.4+.
+
+     --proxy-password=VALUE
+     Proxy Password - Explicit proxy password (optional) to be used with
+       username. Requires explicit proxy (`--proxy` or config setting) and user
+       name.  Overrides the default proxy password (encrypted in settings if
+       set). Available for config settings in 0.9.9.9+, this CLI option
+       available in 0.10.4+.
+
+     --proxy-bypass-list=VALUE
+     ProxyBypassList - Comma separated list of regex locations to bypass on
+       proxy. Requires explicit proxy (`--proxy` or config setting). Overrides
+       the default proxy bypass list of ''. Available in 0.10.4+.
+
+     --proxy-bypass-on-local
+     Proxy Bypass On Local - Bypass proxy for local connections. Requires
+       explicit proxy (`--proxy` or config setting). Overrides the default
+       proxy bypass on local setting of 'True'. Available in 0.10.4+.
+
+     --log-file=VALUE
+     Log File to output to in addition to regular loggers. Available in 0.1-
+       0.8+.
+
+     --skipcompatibilitychecks, --skip-compatibility-checks
+     SkipCompatibilityChecks - Prevent warnings being shown before and after
+       command execution when a runtime compatibility problem is found between
+       the version of Chocolatey and the Chocolatey Licensed Extension.
+       Available in 1.1.0+
+Chocolatey v1.2.1
+
+C:\WINDOWS\system32>choco install -y wget nano notepad2
+Chocolatey v1.2.1
+Installing the following packages:
+wget;nano;notepad2
+By installing, you accept licenses for the packages.
+Progress: Downloading Wget 1.21.3... 100%
+
+Wget v1.21.3 [Approved]
+wget package files install completed. Performing other installation steps.
+Getting x64 bit zip
+Extracting C:\ProgramData\chocolatey\lib\Wget\tools\wget-1.21.3-win64_x64.zip to C:\ProgramData\chocolatey\lib\Wget\tools...
+C:\ProgramData\chocolatey\lib\Wget\tools
+ ShimGen has successfully created a shim for wget.exe
+ The install of wget was successful.
+  Software installed to 'C:\ProgramData\chocolatey\lib\Wget\tools'
+Progress: Downloading nano-win 7.0.7... 100%
+Progress: Downloading nano 7.0.7... 100%
+
+nano-win v7.0.7 [Approved]
+nano-win package files install completed. Performing other installation steps.
+Downloading nano-win
+  from 'https://files.lhmouse.com/nano-win/nano-win_10141_v7.0-7-gbef7de8e9.7z'
+Progress: 100% - Completed download of C:\Users\bhara\AppData\Local\Temp\chocolatey\nano-win\7.0.7\nano-win_10141_v7.0-7-gbef7de8e9.7z (645.89 KB).
+Download of nano-win_10141_v7.0-7-gbef7de8e9.7z (645.89 KB) completed.
+Hashes match.
+Extracting C:\Users\bhara\AppData\Local\Temp\chocolatey\nano-win\7.0.7\nano-win_10141_v7.0-7-gbef7de8e9.7z to C:\ProgramData\chocolatey\lib\nano-win\tools...
+C:\ProgramData\chocolatey\lib\nano-win\tools
+ ShimGen has successfully created a shim for nano.exe
+ ShimGen has successfully created a shim for nano.exe
+ The install of nano-win was successful.
+  Software installed to 'C:\ProgramData\chocolatey\lib\nano-win\tools'
+
+nano v7.0.7 [Approved]
+nano package files install completed. Performing other installation steps.
+ The install of nano was successful.
+  Software installed to 'C:\ProgramData\chocolatey\lib\nano'
+Progress: Downloading notepad2 4.2.25.20160422... 100%
+
+notepad2 v4.2.25.20160422 [Approved]
+notepad2 package files install completed. Performing other installation steps.
+WARNING: Url has SSL/TLS available, switching to HTTPS for download
+Attempt to get headers for https://www.flos-freeware.ch/zip/Notepad2_4.2.25_x64.exe failed.
+  The remote file either doesn't exist, is unauthorized, or is forbidden for url 'https://www.flos-freeware.ch/zip/Notepad2_4.2.25_x64.exe'. Exception calling "GetResponse" with "0" argument(s): "The operation has timed out"
+Downloading notepad2 64 bit
+  from 'https://www.flos-freeware.ch/zip/Notepad2_4.2.25_x64.exe'
+Progress: 100% - Completed download of C:\Users\bhara\AppData\Local\Temp\chocolatey\notepad2\4.2.25.20160422\Notepad2_4.2.25_x64.exe (350.5 KB).
+Download of Notepad2_4.2.25_x64.exe (350.5 KB) completed.
+Hashes match.
+Installing notepad2...
+notepad2 has been installed.
+  notepad2 may be able to be automatically uninstalled.
+ The install of notepad2 was successful.
+  Software installed to 'C:\Program Files\Notepad2\'
+
+Chocolatey installed 4/4 packages.
+ See the log for details (C:\ProgramData\chocolatey\logs\chocolatey.log).
+
+C:\WINDOWS\system32>choco install -y consolez cmder conemu
+Chocolatey v1.2.1
+Installing the following packages:
+consolez;cmder;conemu
+By installing, you accept licenses for the packages.
+Progress: Downloading ConsoleZ 1.19.0.19104... 100%
+
+ConsoleZ v1.19.0.19104 [Approved]
+consolez package files install completed. Performing other installation steps.
+Downloading ConsoleZ 64 bit
+  from 'https://github.com/cbucher/console/releases/download/1.19.0/ConsoleZ.x64.1.19.0.19104.zip'
+Progress: 100% - Completed download of C:\Users\bhara\AppData\Local\Temp\chocolatey\ConsoleZ\1.19.0.19104\ConsoleZ.x64.1.19.0.19104.zip (2.72 MB).
+Download of ConsoleZ.x64.1.19.0.19104.zip (2.72 MB) completed.
+Hashes match.
+Extracting C:\Users\bhara\AppData\Local\Temp\chocolatey\ConsoleZ\1.19.0.19104\ConsoleZ.x64.1.19.0.19104.zip to C:\ProgramData\chocolatey\lib\ConsoleZ\tools...
+C:\ProgramData\chocolatey\lib\ConsoleZ\tools
+ ShimGen has successfully created a gui shim for Console.exe
+ The install of consolez was successful.
+  Software installed to 'C:\ProgramData\chocolatey\lib\ConsoleZ\tools'
+Progress: Downloading vcredist2010 10.0.40219.32503... 100%
+Progress: Downloading Cmder 1.3.20... 100%
+
+vcredist2010 v10.0.40219.32503 [Approved]
+vcredist2010 package files install completed. Performing other installation steps.
+Downloading vcredist2010 64 bit
+  from 'https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x64.exe'
+Progress: 100% - Completed download of C:\Users\bhara\AppData\Local\Temp\chocolatey\vcredist2010\10.0.40219.32503\vcredist_x64.exe (9.8 MB).
+Download of vcredist_x64.exe (9.8 MB) completed.
+Hashes match.
+Installing vcredist2010...
+vcredist2010 has been installed.
+Downloading vcredist2010 32 bit
+  from 'https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x86.exe'
+Progress: 100% - Completed download of C:\Users\bhara\AppData\Local\Temp\chocolatey\vcredist2010\10.0.40219.32503\vcredist_x86.exe (8.58 MB).
+Download of vcredist_x86.exe (8.58 MB) completed.
+Hashes match.
+Installing vcredist2010...
+vcredist2010 has been installed.
+  vcredist2010 may be able to be automatically uninstalled.
+ The install of vcredist2010 was successful.
+  Software installed as 'exe', install location is likely default.
+
+Cmder v1.3.20 [Approved]
+cmder package files install completed. Performing other installation steps.
+Extracting C:\ProgramData\chocolatey\lib\Cmder\tools\cmder.7z to C:\tools\Cmder...
+C:\tools\Cmder
+PATH environment variable does not have C:\tools\Cmder in it. Adding...
+Environment Vars (like PATH) have changed. Close/reopen your shell to
+ see the changes (or in powershell/cmd.exe just type `refreshenv`).
+ The install of cmder was successful.
+  Software installed to 'C:\tools\Cmder'
+Progress: Downloading ConEmu 22.12.18.0... 100%
+
+ConEmu v22.12.18.0 [Approved]
+conemu package files install completed. Performing other installation steps.
+Downloading ConEmu 64 bit
+  from 'https://github.com/Maximus5/ConEmu/releases/download/v22.12.18/ConEmuSetup.221218.exe'
+Progress: 100% - Completed download of C:\Users\bhara\AppData\Local\Temp\chocolatey\ConEmu\22.12.18.0\ConEmuSetup.221218.exe (7.6 MB).
+Download of ConEmuSetup.221218.exe (7.6 MB) completed.
+Hashes match.
+Installing ConEmu...
+ConEmu has been installed.
+  conemu may be able to be automatically uninstalled.
+ The install of conemu was successful.
+  Software installed as 'exe', install location is likely default.
+
+Chocolatey installed 4/4 packages.
+ See the log for details (C:\ProgramData\chocolatey\logs\chocolatey.log).
+
+Did you know the proceeds of Pro (and some proceeds from other
+ licensed editions) go into bettering the community infrastructure?
+ Your support ensures an active community, keeps Chocolatey tip-top,
+ plus it nets you some awesome features!
+ https://chocolatey.org/compare
+
+C:\WINDOWS\system32>choco install -y git --params "/GitAndUnixToolsOnPath /WindowsTerminal"
+Chocolatey v1.2.1
+Installing the following packages:
+git
+By installing, you accept licenses for the packages.
+Progress: Downloading git.install 2.39.0... 100%
+Progress: Downloading chocolatey-core.extension 1.4.0... 100%
+Progress: Downloading chocolatey-compatibility.extension 1.0.0... 100%
+Progress: Downloading git 2.39.0... 100%
+
+chocolatey-compatibility.extension v1.0.0 [Approved]
+chocolatey-compatibility.extension package files install completed. Performing other installation steps.
+ Installed/updated chocolatey-compatibility extensions.
+ The install of chocolatey-compatibility.extension was successful.
+  Software installed to 'C:\ProgramData\chocolatey\extensions\chocolatey-compatibility'
+
+chocolatey-core.extension v1.4.0 [Approved]
+chocolatey-core.extension package files install completed. Performing other installation steps.
+ Installed/updated chocolatey-core extensions.
+ The install of chocolatey-core.extension was successful.
+  Software installed to 'C:\ProgramData\chocolatey\extensions\chocolatey-core'
+
+git.install v2.39.0 [Approved]
+git.install package files install completed. Performing other installation steps.
+Using Git LFS
+Installing 64-bit git.install...
+ERROR: Running ["C:\ProgramData\chocolatey\lib\git.install\tools\Git-2.39.0-64-bit.exe" /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /NOCANCEL /SP- /LOG /COMPONENTS="icons,assoc,assoc_sh,ext,ext\shellhere,ext\guihere,gitlfs,icons\quicklaunch" /o:PathOption=CmdTools /o:BashTerminalOption=ConHost ] was not successful. Exit code was '1'. See log for possible error messages.
+The install of git.install was NOT successful.
+Error while running 'C:\ProgramData\chocolatey\lib\git.install\tools\chocolateyInstall.ps1'.
+ See log for details.
+
+git v2.39.0 [Approved]
+git package files install completed. Performing other installation steps.
+ The install of git was successful.
+  Software installed to 'C:\ProgramData\chocolatey\lib\git'
+
+Chocolatey installed 3/4 packages. 1 packages failed.
+ See the log for details (C:\ProgramData\chocolatey\logs\chocolatey.log).
+
+Failures
+ - git.install (exited 1) - Error while running 'C:\ProgramData\chocolatey\lib\git.install\tools\chocolateyInstall.ps1'.
+ See log for details.
+
+C:\WINDOWS\system32>
+
+Microsoft Windows [Version 10.0.19045.2364]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\WINDOWS\system32>choco install -y git --params "/GitAndUnixToolsOnPath /WindowsTerminal"
+Chocolatey v1.2.1
+Installing the following packages:
+git
+By installing, you accept licenses for the packages.
+git v2.39.0 already installed.
+ Use --force to reinstall, specify a version to install, or try upgrade.
+
+Chocolatey installed 0/1 packages.
+ See the log for details (C:\ProgramData\chocolatey\logs\chocolatey.log).
+
+Warnings:
+ - git - git v2.39.0 already installed.
+ Use --force to reinstall, specify a version to install, or try upgrade.
+
+C:\WINDOWS\system32>choco install -y git --params "/GitAndUnixToolsOnPath /WindowsTerminal" --force
+Chocolatey v1.2.1
+Installing the following packages:
+git
+By installing, you accept licenses for the packages.
+git v2.39.0 already installed. Forcing reinstall of version '2.39.0'.
+ Please use upgrade if you meant to upgrade to a new version.
+Progress: Downloading git 2.39.0... 100%
+
+git.install v2.39.0 (forced) [Approved]
+git.install package files install completed. Performing other installation steps.
+Using Git LFS
+Installing 64-bit git.install...
+git.install has been installed.
+git.install installed to 'C:\Program Files\Git'
+  git.install can be automatically uninstalled.
+Environment Vars (like PATH) have changed. Close/reopen your shell to
+ see the changes (or in powershell/cmd.exe just type `refreshenv`).
+ The install of git.install was successful.
+  Software installed to 'C:\Program Files\Git\'
+
+git v2.39.0 (forced) [Approved]
+git package files install completed. Performing other installation steps.
+ The install of git was successful.
+  Software installed to 'C:\ProgramData\chocolatey\lib\git'
+
+Chocolatey installed 2/2 packages.
+ See the log for details (C:\ProgramData\chocolatey\logs\chocolatey.log).
+
+C:\WINDOWS\system32>refreshenv
+Refreshing environment variables from registry for cmd.exe. Please wait...Finished..
+
+C:\WINDOWS\system32>bash
+
+bhara@DESKTOP-SSN6PB4  /c/WINDOWS/system32
+$ cd ~
+
+bhara@DESKTOP-SSN6PB4  ~
+$ pwd
+/c/Users/bhara
+
+bhara@DESKTOP-SSN6PB4  ~
+$ curl -sSL https://gitlab.com/roybhaskar9/devops/raw/master/Lab/LaptopLab/Windows/version10/s9vagrantsetup.sh | bash
+A `Vagrantfile` has been placed in this directory. You are now
+ready to `vagrant up` your first virtual environment! Please read
+the comments in the Vagrantfile as well as documentation on
+`vagrantup.com` for more information on using Vagrant.
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Box 'centos/7' could not be found. Attempting to find and install...
+    default: Box Provider: virtualbox
+    default: Box Version: >= 0
+==> default: Loading metadata for box 'centos/7'
+    default: URL: https://vagrantcloud.com/centos/7
+==> default: Adding box 'centos/7' (v2004.01) for provider: virtualbox
+    default: Downloading: https://vagrantcloud.com/centos/boxes/7/versions/2004.01/providers/virtualbox.box
+Download redirected to host: cloud.centos.org
+    default:
+    default: Calculating and comparing box checksum...
+==> default: Successfully added box 'centos/7' (v2004.01) for 'virtualbox'!
+==> default: Importing base box 'centos/7'...
+==> default: Matching MAC address for NAT networking...
+==> default: Checking if box 'centos/7' version '2004.01' is up to date...
+==> default: Setting the name of the VM: centos_default_1672834999775_32131
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==> default: Forwarding ports...
+    default: 22 (guest) => 2222 (host) (adapter 1)
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if it's present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> default: Machine booted and ready!
+==> default: Checking for guest additions in VM...
+    default: No guest additions were detected on the base box for this VM! Guest
+    default: additions are required for forwarded ports, shared folders, host only
+    default: networking, and more. If SSH fails on this machine, please install
+    default: the guest additions and repackage the box to continue.
+    default:
+    default: This is not an error message; everything may continue to work properly,
+    default: in which case you may ignore this message.
+==> default: Rsyncing folder: /cygdrive/c/Users/bhara/vagrant/centos/ => /vagrant
+==> default: Attempting graceful shutdown of VM...
+A `Vagrantfile` has been placed in this directory. You are now
+ready to `vagrant up` your first virtual environment! Please read
+the comments in the Vagrantfile as well as documentation on
+`vagrantup.com` for more information on using Vagrant.
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Box 'ubuntu/xenial64' could not be found. Attempting to find and install...
+    default: Box Provider: virtualbox
+    default: Box Version: >= 0
+==> default: Loading metadata for box 'ubuntu/xenial64'
+    default: URL: https://vagrantcloud.com/ubuntu/xenial64
+==> default: Adding box 'ubuntu/xenial64' (v20211001.0.0) for provider: virtualbox
+    default: Downloading: https://vagrantcloud.com/ubuntu/boxes/xenial64/versions/20211001.0.0/providers/virtualbox.box
+Download redirected to host: cloud-images.ubuntu.com
+    default:
+==> default: Successfully added box 'ubuntu/xenial64' (v20211001.0.0) for 'virtualbox'!
+==> default: Importing base box 'ubuntu/xenial64'...
+==> default: Matching MAC address for NAT networking...
+==> default: Checking if box 'ubuntu/xenial64' version '20211001.0.0' is up to date...
+==> default: Setting the name of the VM: ubuntu_default_1672835196844_10060
+Vagrant is currently configured to create VirtualBox synced folders with
+the `SharedFoldersEnableSymlinksCreate` option enabled. If the Vagrant
+guest is not trusted, you may want to disable this option. For more
+information on this option, please refer to the VirtualBox manual:
+
+  https://www.virtualbox.org/manual/ch04.html#sharedfolders
+
+This option can be disabled globally with an environment variable:
+
+  VAGRANT_DISABLE_VBOXSYMLINKCREATE=1
+
+or on a per folder basis within the Vagrantfile:
+
+  config.vm.synced_folder '/host/path', '/guest/path', SharedFoldersEnableSymlinksCreate: false
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==> default: Forwarding ports...
+    default: 22 (guest) => 2222 (host) (adapter 1)
+==> default: Running 'pre-boot' VM customizations...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if it's present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> default: Machine booted and ready!
+==> default: Checking for guest additions in VM...
+    default: The guest additions on this VM do not match the installed version of
+    default: VirtualBox! In most cases this is fine, but in rare cases it can
+    default: prevent things such as shared folders from working properly. If you see
+    default: shared folder errors, please make sure the guest additions within the
+    default: virtual machine match the version of VirtualBox you have installed on
+    default: your host and reload your VM.
+    default:
+    default: Guest Additions Version: 5.1.38
+    default: VirtualBox Version: 7.0
+==> default: Mounting shared folders...
+    default: /vagrant => C:/Users/bhara/vagrant/ubuntu
+==> default: Attempting graceful shutdown of VM...
+
+bhara@DESKTOP-SSN6PB4  ~
+$
+
+bhara@DESKTOP-SSN6PB4  ~
+$
+
+bhara@DESKTOP-SSN6PB4  ~
+$ curl -sSL https://gitlab.com/roybhaskar9/devops/raw/master/Lab/LaptopLab/Windows/version10/labfolders.sh | bash
+A `Vagrantfile` has been placed in this directory. You are now
+ready to `vagrant up` your first virtual environment! Please read
+the comments in the Vagrantfile as well as documentation on
+`vagrantup.com` for more information on using Vagrant.
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Importing base box 'centos/7'...
+==> default: Matching MAC address for NAT networking...
+==> default: Checking if box 'centos/7' version '2004.01' is up to date...
+==> default: Setting the name of the VM: centos_default_1672835291573_33413
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==> default: Forwarding ports...
+    default: 22 (guest) => 2222 (host) (adapter 1)
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if it's present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> default: Machine booted and ready!
+==> default: Checking for guest additions in VM...
+    default: No guest additions were detected on the base box for this VM! Guest
+    default: additions are required for forwarded ports, shared folders, host only
+    default: networking, and more. If SSH fails on this machine, please install
+    default: the guest additions and repackage the box to continue.
+    default:
+    default: This is not an error message; everything may continue to work properly,
+    default: in which case you may ignore this message.
+==> default: Rsyncing folder: /cygdrive/c/Users/bhara/devops/provision/vagrant/centos/ => /vagrant
+==> default: Attempting graceful shutdown of VM...
+A `Vagrantfile` has been placed in this directory. You are now
+ready to `vagrant up` your first virtual environment! Please read
+the comments in the Vagrantfile as well as documentation on
+`vagrantup.com` for more information on using Vagrant.
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Importing base box 'ubuntu/xenial64'...
+==> default: Matching MAC address for NAT networking...
+==> default: Checking if box 'ubuntu/xenial64' version '20211001.0.0' is up to date...
+==> default: Setting the name of the VM: ubuntu_default_1672835362195_36425
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==> default: Forwarding ports...
+    default: 22 (guest) => 2222 (host) (adapter 1)
+==> default: Running 'pre-boot' VM customizations...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if it's present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> default: Machine booted and ready!
+==> default: Checking for guest additions in VM...
+    default: The guest additions on this VM do not match the installed version of
+    default: VirtualBox! In most cases this is fine, but in rare cases it can
+    default: prevent things such as shared folders from working properly. If you see
+    default: shared folder errors, please make sure the guest additions within the
+    default: virtual machine match the version of VirtualBox you have installed on
+    default: your host and reload your VM.
+    default:
+    default: Guest Additions Version: 5.1.38
+    default: VirtualBox Version: 7.0
+==> default: Mounting shared folders...
+    default: /vagrant => C:/Users/bhara/devops/provision/vagrant/ubuntu
+==> default: Attempting graceful shutdown of VM...
+Lab Setup Complete
+
+bhara@DESKTOP-SSN6PB4  ~
+$ vagrant
+Usage: vagrant [options] <command> [<args>]
+
+    -h, --help                       Print this help.
+
+Common commands:
+     autocomplete    manages autocomplete installation on host
+     box             manages boxes: installation, removal, etc.
+     cloud           manages everything related to Vagrant Cloud
+     destroy         stops and deletes all traces of the vagrant machine
+     global-status   outputs status Vagrant environments for this user
+     halt            stops the vagrant machine
+     help            shows the help for a subcommand
+     init            initializes a new Vagrant environment by creating a Vagrantfile
+     login
+     package         packages a running vagrant environment into a box
+     plugin          manages plugins: install, uninstall, update, etc.
+     port            displays information about guest port mappings
+     powershell      connects to machine via powershell remoting
+     provision       provisions the vagrant machine
+     push            deploys code in this environment to a configured destination
+     rdp             connects to machine via RDP
+     reload          restarts vagrant machine, loads new Vagrantfile configuration
+     resume          resume a suspended vagrant machine
+     serve           start Vagrant server
+     snapshot        manages snapshots: saving, restoring, etc.
+     ssh             connects to machine via SSH
+     ssh-config      outputs OpenSSH valid configuration to connect to the machine
+     status          outputs status of the vagrant machine
+     suspend         suspends the machine
+     up              starts and provisions the vagrant environment
+     upload          upload to machine via communicator
+     validate        validates the Vagrantfile
+     version         prints current and latest Vagrant version
+     winrm           executes commands on a machine via WinRM
+     winrm-config    outputs WinRM configuration to connect to the machine
+
+For help on any individual command run `vagrant COMMAND -h`
+
+Additional subcommands are available, but are either more advanced
+or not commonly used. To see all subcommands, run the command
+`vagrant list-commands`.
+        --[no-]color                 Enable or disable color output
+        --machine-readable           Enable machine readable output
+    -v, --version                    Display Vagrant version
+        --debug                      Enable debug output
+        --timestamp                  Enable timestamps on log output
+        --debug-timestamp            Enable debug output with timestamps
+        --no-tty                     Enable non-interactive output
+
+bhara@DESKTOP-SSN6PB4  ~
+$ cd devops
+
+bhara@DESKTOP-SSN6PB4  ~/devops
+$ tree
+bash: tree: command not found
+
+bhara@DESKTOP-SSN6PB4  ~/devops
+$ ls
+coding  provision  release
+
+bhara@DESKTOP-SSN6PB4  ~/devops
+$ cd provision/vagrant/ubuntu
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ ls
+Vagrantfile  ubuntu-xenial-16.04-cloudimg-console.log
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ code Vagrantfile
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant box list
+centos/7        (virtualbox, 2004.01)
+generic/rhel9   (virtualbox, 4.2.8)
+ubuntu/xenial64 (virtualbox, 20211001.0.0)
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant box add generic/ubuntu1804
+==> box: Loading metadata for box 'generic/ubuntu1804'
+    box: URL: https://vagrantcloud.com/generic/ubuntu1804
+This box can work with multiple providers! The providers that it
+can work with are listed below. Please review the list and choose
+the provider you will be working with.
+
+1) hyperv
+2) libvirt
+3) parallels
+4) virtualbox
+5) vmware_desktop
+
+Enter your choice: 4
+==> box: Adding box 'generic/ubuntu1804' (v4.2.8) for provider: virtualbox
+    box: Downloading: https://vagrantcloud.com/generic/boxes/ubuntu1804/versions/4.2.8/providers/virtualbox.box
+    box:
+    box: Calculating and comparing box checksum...
+==> box: Successfully added box 'generic/ubuntu1804' (v4.2.8) for 'virtualbox'!
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant box list
+centos/7           (virtualbox, 2004.01)
+generic/rhel9      (virtualbox, 4.2.8)
+generic/ubuntu1804 (virtualbox, 4.2.8)
+ubuntu/xenial64    (virtualbox, 20211001.0.0)
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant.exe init generic/ubuntu1804 --force
+A `Vagrantfile` has been placed in this directory. You are now
+ready to `vagrant up` your first virtual environment! Please read
+the comments in the Vagrantfile as well as documentation on
+`vagrantup.com` for more information on using Vagrant.
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ code Vagrantfile
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ pwd
+/c/Users/bhara/devops/provision/vagrant/ubuntu
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ cd..
+bash: cd..: command not found
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ cd ..
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant
+$ ls
+centos  ubuntu
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant
+$ cd centos
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/centos
+$ ls
+Vagrantfile
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/centos
+$ code Vagrantfile
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/centos
+$ cd ..
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant
+$ ls
+centos  ubuntu
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant
+$ cd ubuntu/
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ ls
+Vagrantfile  ubuntu-xenial-16.04-cloudimg-console.log
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant status
+Current machine states:
+
+default                   poweroff (virtualbox)
+
+The VM is powered off. To restart the VM, simply run `vagrant up`
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Checking if box 'ubuntu/xenial64' version '20211001.0.0' is up to date...
+==> default: Clearing any previously set forwarded ports...
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==> default: Forwarding ports...
+    default: 22 (guest) => 2222 (host) (adapter 1)
+==> default: Running 'pre-boot' VM customizations...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default: Warning: Connection reset. Retrying...
+==> default: Machine booted and ready!
+==> default: Checking for guest additions in VM...
+    default: The guest additions on this VM do not match the installed version of
+    default: VirtualBox! In most cases this is fine, but in rare cases it can
+    default: prevent things such as shared folders from working properly. If you see
+    default: shared folder errors, please make sure the guest additions within the
+    default: virtual machine match the version of VirtualBox you have installed on
+    default: your host and reload your VM.
+    default:
+    default: Guest Additions Version: 5.1.38
+    default: VirtualBox Version: 7.0
+==> default: Mounting shared folders...
+    default: /vagrant => C:/Users/bhara/devops/provision/vagrant/ubuntu
+==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> default: flag to force provisioning. Provisioners marked to run always will still run.
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant status
+Current machine states:
+
+default                   running (virtualbox)
+
+The VM is running. To stop this VM, you can run `vagrant halt` to
+shut it down forcefully, or you can run `vagrant suspend` to simply
+suspend the virtual machine. In either case, to restart it again,
+simply run `vagrant up`.
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant ssh
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-210-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+UA Infra: Extended Security Maintenance (ESM) is not enabled.
+
+0 updates can be applied immediately.
+
+45 additional security updates can be applied with UA Infra: ESM
+Learn more about enabling UA Infra: ESM service for Ubuntu 16.04 at
+https://ubuntu.com/16-04
+
+New release '18.04.6 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+vagrant@ubuntu-xenial:~$ sudo su -
+root@ubuntu-xenial:~# cat /etc/*release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=16.04
+DISTRIB_CODENAME=xenial
+DISTRIB_DESCRIPTION="Ubuntu 16.04.7 LTS"
+NAME="Ubuntu"
+VERSION="16.04.7 LTS (Xenial Xerus)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 16.04.7 LTS"
+VERSION_ID="16.04"
+HOME_URL="http://www.ubuntu.com/"
+SUPPORT_URL="http://help.ubuntu.com/"
+BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
+VERSION_CODENAME=xenial
+UBUNTU_CODENAME=xenial
+root@ubuntu-xenial:~# sudo apt-get update
+Hit:1 http://archive.ubuntu.com/ubuntu xenial InRelease
+Get:2 http://archive.ubuntu.com/ubuntu xenial-updates InRelease [99.8 kB]
+Get:3 http://archive.ubuntu.com/ubuntu xenial-backports InRelease [97.4 kB]
+Get:4 https://esm.ubuntu.com/infra/ubuntu xenial-infra-security InRelease [7,524 B]
+Get:5 https://esm.ubuntu.com/infra/ubuntu xenial-infra-updates InRelease [7,475 B]
+Get:6 http://archive.ubuntu.com/ubuntu xenial/universe amd64 Packages [7,532 kB]
+Get:7 https://esm.ubuntu.com/infra/ubuntu xenial-infra-security/main amd64 Packages [637 kB]
+Get:8 http://archive.ubuntu.com/ubuntu xenial/universe Translation-en [4,354 kB]
+Get:9 http://archive.ubuntu.com/ubuntu xenial/multiverse amd64 Packages [144 kB]
+Get:10 http://archive.ubuntu.com/ubuntu xenial/multiverse Translation-en [106 kB]
+Get:11 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 Packages [2,049 kB]
+Get:12 http://archive.ubuntu.com/ubuntu xenial-updates/main Translation-en [461 kB]
+Get:13 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 Packages [1,220 kB]
+Get:14 http://archive.ubuntu.com/ubuntu xenial-updates/universe Translation-en [358 kB]
+Get:15 http://archive.ubuntu.com/ubuntu xenial-updates/multiverse amd64 Packages [22.6 kB]
+Get:16 http://archive.ubuntu.com/ubuntu xenial-updates/multiverse Translation-en [8,476 B]
+Get:17 http://archive.ubuntu.com/ubuntu xenial-backports/main amd64 Packages [9,812 B]
+Get:18 http://archive.ubuntu.com/ubuntu xenial-backports/main Translation-en [4,456 B]
+Get:19 http://archive.ubuntu.com/ubuntu xenial-backports/universe amd64 Packages [11.3 kB]
+Get:20 http://security.ubuntu.com/ubuntu xenial-security InRelease [99.8 kB]
+Get:21 http://archive.ubuntu.com/ubuntu xenial-backports/universe Translation-en [4,476 B]
+Get:22 http://security.ubuntu.com/ubuntu xenial-security/main Translation-en [360 kB]
+Get:23 http://security.ubuntu.com/ubuntu xenial-security/universe amd64 Packages [785 kB]
+Get:24 http://security.ubuntu.com/ubuntu xenial-security/universe Translation-en [225 kB]
+Get:25 http://security.ubuntu.com/ubuntu xenial-security/multiverse amd64 Packages [7,864 B]
+Get:26 http://security.ubuntu.com/ubuntu xenial-security/multiverse Translation-en [2,672 B]
+Fetched 18.6 MB in 24s (760 kB/s)
+Reading package lists... Done
+root@ubuntu-xenial:~# curl -fsSL https://test.docker.com -o test-docker.sh
+root@ubuntu-xenial:~# sh test-docker.sh
+# Executing docker install script, commit: 4f282167c425347a931ccfd95cc91fab041d414f
+
+DEPRECATION WARNING
+    This Linux distribution (ubuntu xenial) reached end-of-life and is no longer supported by this script.
+    No updates or security fixes will be released for this distribution, and users are recommended
+    to upgrade to a currently maintained version of ubuntu.
+
+Press Ctrl+C now to abort this script, or wait for the installation to continue.
++ sh -c apt-get update -qq >/dev/null
++ sh -c DEBIAN_FRONTEND=noninteractive apt-get install -y -qq apt-transport-https ca-certificates curl >/dev/null
++ sh -c mkdir -p /etc/apt/keyrings && chmod -R 0755 /etc/apt/keyrings
++ sh -c curl -fsSL "https://download.docker.com/linux/ubuntu/gpg" | gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg
++ sh -c chmod a+r /etc/apt/keyrings/docker.gpg
++ sh -c echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu xenial test" > /etc/apt/sources.list.d/docker.list
++ sh -c apt-get update -qq >/dev/null
++ sh -c DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-scan-plugin docker-buildx-plugin >/dev/null
+E: Unable to locate package docker-compose-plugin
+E: Unable to locate package docker-buildx-plugin
+root@ubuntu-xenial:~# exit
+logout
+vagrant@ubuntu-xenial:~$ exit
+logout
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant destroy -f
+==> default: Forcing shutdown of VM...
+==> default: Destroying VM and associated drives...
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ code Vagrantfile
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant box list
+centos/7           (virtualbox, 2004.01)
+generic/rhel9      (virtualbox, 4.2.8)
+generic/ubuntu1804 (virtualbox, 4.2.8)
+ubuntu/xenial64    (virtualbox, 20211001.0.0)
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant box --help
+Usage: vagrant box <subcommand> [<args>]
+
+Available subcommands:
+     add
+     list
+     outdated
+     prune
+     remove
+     repackage
+     update
+
+For help on any individual subcommand run `vagrant box <subcommand> -h`
+        --[no-]color                 Enable or disable color output
+        --machine-readable           Enable machine readable output
+    -v, --version                    Display Vagrant version
+        --debug                      Enable debug output
+        --timestamp                  Enable timestamps on log output
+        --debug-timestamp            Enable debug output with timestamps
+        --no-tty                     Enable non-interactive output
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant box remove ubuntu/xenial64
+Box 'ubuntu/xenial64' (v20211001.0.0) with provider 'virtualbox' appears
+to still be in use by at least one Vagrant environment. Removing
+the box could corrupt the environment. We recommend destroying
+these environments first:
+
+default (ID: fa480bab1eac4d788ba05dd4abca6065)
+
+Are you sure you want to remove this box? [y/N] y
+Removing box 'ubuntu/xenial64' (v20211001.0.0) with provider 'virtualbox'...
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant.exe init generic/ubuntu1804 --force
+A `Vagrantfile` has been placed in this directory. You are now
+ready to `vagrant up` your first virtual environment! Please read
+the comments in the Vagrantfile as well as documentation on
+`vagrantup.com` for more information on using Vagrant.
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant status
+Current machine states:
+
+default                   not created (virtualbox)
+
+The environment has not yet been created. Run `vagrant up` to
+create the environment. If a machine is not created, only the
+default provider will be shown. So if a provider is not listed,
+then the machine is not created for that environment.
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant box list
+centos/7           (virtualbox, 2004.01)
+generic/rhel9      (virtualbox, 4.2.8)
+generic/ubuntu1804 (virtualbox, 4.2.8)
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Importing base box 'generic/ubuntu1804'...
+==> default: Matching MAC address for NAT networking...
+==> default: Checking if box 'generic/ubuntu1804' version '4.2.8' is up to date...
+==> default: Setting the name of the VM: ubuntu_default_1672837916476_60994
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==> default: Forwarding ports...
+    default: 22 (guest) => 2222 (host) (adapter 1)
+==> default: Running 'pre-boot' VM customizations...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if it's present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> default: Machine booted and ready!
+==> default: Checking for guest additions in VM...
+    default: The guest additions on this VM do not match the installed version of
+    default: VirtualBox! In most cases this is fine, but in rare cases it can
+    default: prevent things such as shared folders from working properly. If you see
+    default: shared folder errors, please make sure the guest additions within the
+    default: virtual machine match the version of VirtualBox you have installed on
+    default: your host and reload your VM.
+    default:
+    default: Guest Additions Version: 5.2.42
+    default: VirtualBox Version: 7.0
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant status
+Current machine states:
+
+default                   running (virtualbox)
+
+The VM is running. To stop this VM, you can run `vagrant halt` to
+shut it down forcefully, or you can run `vagrant suspend` to simply
+suspend the virtual machine. In either case, to restart it again,
+simply run `vagrant up`.
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant ssh
+vagrant@ubuntu1804:~$ sudo su -
+root@ubuntu1804:~# cat /etc/*release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=18.04
+DISTRIB_CODENAME=bionic
+DISTRIB_DESCRIPTION="Ubuntu 18.04.6 LTS"
+NAME="Ubuntu"
+VERSION="18.04.6 LTS (Bionic Beaver)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 18.04.6 LTS"
+VERSION_ID="18.04"
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+VERSION_CODENAME=bionic
+UBUNTU_CODENAME=bionic
+root@ubuntu1804:~# apt-get update
+Hit:1 http://us.archive.ubuntu.com/ubuntu bionic InRelease
+Get:2 http://us.archive.ubuntu.com/ubuntu bionic-updates InRelease [88.7 kB]
+Get:3 http://us.archive.ubuntu.com/ubuntu bionic-backports InRelease [83.3 kB]
+Get:4 http://us.archive.ubuntu.com/ubuntu bionic-updates/main i386 Packages [1,581 kB]
+Get:5 http://security.ubuntu.com/ubuntu bionic-security InRelease [88.7 kB]
+Get:6 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 Packages [2,850 kB]
+Get:7 http://security.ubuntu.com/ubuntu bionic-security/main i386 Packages [1,287 kB]
+Get:8 http://security.ubuntu.com/ubuntu bionic-security/main amd64 Packages [2,497 kB]
+Get:9 http://security.ubuntu.com/ubuntu bionic-security/main Translation-en [432 kB]
+Get:10 http://us.archive.ubuntu.com/ubuntu bionic-updates/main Translation-en [520 kB]
+Get:11 http://security.ubuntu.com/ubuntu bionic-security/universe amd64 Packages [1,250 kB]
+Get:12 http://us.archive.ubuntu.com/ubuntu bionic-updates/universe i386 Packages [1,635 kB]
+Get:13 http://security.ubuntu.com/ubuntu bionic-security/universe i386 Packages [1,046 kB]
+Get:14 http://us.archive.ubuntu.com/ubuntu bionic-updates/universe amd64 Packages [1,863 kB]
+Get:15 http://security.ubuntu.com/ubuntu bionic-security/universe Translation-en [290 kB]
+Get:16 http://us.archive.ubuntu.com/ubuntu bionic-updates/universe Translation-en [403 kB]
+Fetched 15.9 MB in 15s (1,046 kB/s)
+Reading package lists... Done
+root@ubuntu1804:~# curl -fsSL https://test.docker.com -o test-docker.sh
+root@ubuntu1804:~# sh test-docker.sh
+# Executing docker install script, commit: 4f282167c425347a931ccfd95cc91fab041d414f
++ sh -c apt-get update -qq >/dev/null
++ sh -c DEBIAN_FRONTEND=noninteractive apt-get install -y -qq apt-transport-https ca-certificates curl >/dev/null
++ sh -c mkdir -p /etc/apt/keyrings && chmod -R 0755 /etc/apt/keyrings
++ sh -c curl -fsSL "https://download.docker.com/linux/ubuntu/gpg" | gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg
++ sh -c chmod a+r /etc/apt/keyrings/docker.gpg
++ sh -c echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu bionic test" > /etc/apt/sources.list.d/docker.list
++ sh -c apt-get update -qq >/dev/null
++ sh -c DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-scan-plugin docker-buildx-plugin >/dev/null
++ version_gte 20.10
++ [ -z  ]
++ return 0
++ sh -c DEBIAN_FRONTEND=noninteractive apt-get install -y -qq docker-ce-rootless-extras >/dev/null
++ sh -c docker version
+Client: Docker Engine - Community
+ Version:           23.0.0-rc.1
+ API version:       1.42
+ Go version:        go1.19.4
+ Git commit:        139e924
+ Built:             Thu Dec 22 23:36:50 2022
+ OS/Arch:           linux/amd64
+ Context:           default
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          23.0.0-rc.1
+  API version:      1.42 (minimum version 1.12)
+  Go version:       go1.19.4
+  Git commit:       cba986b
+  Built:            Thu Dec 22 23:36:50 2022
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.6.14
+  GitCommit:        9ba4b250366a5ddde94bb7c9d1def331423aa323
+ runc:
+  Version:          1.1.4
+  GitCommit:        v1.1.4-0-g5fd4c4d
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+
+================================================================================
+
+To run Docker as a non-privileged user, consider setting up the
+Docker daemon in rootless mode for your user:
+
+    dockerd-rootless-setuptool.sh install
+
+Visit https://docs.docker.com/go/rootless/ to learn about rootless mode.
+
+
+To run the Docker daemon as a fully privileged service, but granting non-root
+users access, refer to https://docs.docker.com/go/daemon-access/
+
+WARNING: Access to the remote API on a privileged Docker daemon is equivalent
+         to root access on the host. Refer to the 'Docker daemon attack surface'
+         documentation for details: https://docs.docker.com/go/attack-surface/
+
+================================================================================
+
+root@ubuntu1804:~# systemctl status docker
+? docker.service - Docker Application Container Engine
+   Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2023-01-04 13:17:44 UTC; 44s ago
+     Docs: https://docs.docker.com
+ Main PID: 3497 (dockerd)
+    Tasks: 8
+   CGroup: /system.slice/docker.service
+           +-3497 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+Jan 04 13:17:43 ubuntu1804.localdomain dockerd[3497]: time="2023-01-04T13:17:43.757992295Z" level=info msg="[core] [Channel #4] Channel Connectivity change to READY" mo
+Jan 04 13:17:43 ubuntu1804.localdomain dockerd[3497]: time="2023-01-04T13:17:43.865858318Z" level=info msg="Loading containers: start."
+Jan 04 13:17:44 ubuntu1804.localdomain dockerd[3497]: time="2023-01-04T13:17:44.331398118Z" level=info msg="Default bridge (docker0) is assigned with an IP address 172.
+Jan 04 13:17:44 ubuntu1804.localdomain dockerd[3497]: time="2023-01-04T13:17:44.581908305Z" level=info msg="Loading containers: done."
+Jan 04 13:17:44 ubuntu1804.localdomain dockerd[3497]: time="2023-01-04T13:17:44.640443080Z" level=warning msg="WARNING: No swap limit support"
+Jan 04 13:17:44 ubuntu1804.localdomain dockerd[3497]: time="2023-01-04T13:17:44.640760896Z" level=info msg="Docker daemon" commit=cba986b graphdriver=overlay2 version=2
+Jan 04 13:17:44 ubuntu1804.localdomain dockerd[3497]: time="2023-01-04T13:17:44.641137473Z" level=info msg="Daemon has completed initialization"
+Jan 04 13:17:44 ubuntu1804.localdomain dockerd[3497]: time="2023-01-04T13:17:44.722793429Z" level=info msg="[core] [Server #7] Server created" module=grpc
+Jan 04 13:17:44 ubuntu1804.localdomain systemd[1]: Started Docker Application Container Engine.
+Jan 04 13:17:44 ubuntu1804.localdomain dockerd[3497]: time="2023-01-04T13:17:44.736211718Z" level=info msg="API listen on /run/docker.sock"
+lines 1-19/19 (END)
+root@ubuntu1804:~#
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant status
+Current machine states:
+
+default                   running (virtualbox)
+
+The VM is running. To stop this VM, you can run `vagrant halt` to
+shut it down forcefully, or you can run `vagrant suspend` to simply
+suspend the virtual machine. In either case, to restart it again,
+simply run `vagrant up`.
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant halt
+==> default: Attempting graceful shutdown of VM...
+tcsetattr: Input/output error
+Connection to 127.0.0.1 closed by remote host.
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant status
+Current machine states:
+
+default                   poweroff (virtualbox)
+
+The VM is powered off. To restart the VM, simply run `vagrant up`
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$
+
+Microsoft Windows [Version 10.0.19045.2364]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\WINDOWS\system32>bash
+
+bhara@DESKTOP-SSN6PB4  /c/WINDOWS/system32
+$ cd ~
+
+bhara@DESKTOP-SSN6PB4  ~
+$ ls
+'3D Objects'                                                                                    NetHood
+ AppData                                                                                        OneDrive
+'Application Data'                                                                              PrintHood
+ Contacts                                                                                       Recent
+ Cookies                                                                                       'Saved Games'
+ Documents                                                                                      Searches
+ Downloads                                                                                      SendTo
+ Favorites                                                                                     'Start Menu'
+ IntelGraphicsProfiles                                                                          Templates
+ Links                                                                                          Videos
+'Local Settings'                                                                               'VirtualBox VMs'
+ Music                                                                                          devops
+'My Documents'                                                                                  ntuser.dat.LOG1
+ NTUSER.DAT                                                                                     ntuser.dat.LOG2
+ NTUSER.DAT{f709009e-89b3-11ed-9186-b469218484dc}.TM.blf                                        ntuser.ini
+ NTUSER.DAT{f709009e-89b3-11ed-9186-b469218484dc}.TMContainer00000000000000000001.regtrans-ms   vagrant
+ NTUSER.DAT{f709009e-89b3-11ed-9186-b469218484dc}.TMContainer00000000000000000002.regtrans-ms
+
+bhara@DESKTOP-SSN6PB4  ~
+$ cd devops
+
+bhara@DESKTOP-SSN6PB4  ~/devops
+$ ls
+coding  provision  release
+
+bhara@DESKTOP-SSN6PB4  ~/devops
+$ cd provision/
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision
+$ ls
+docker  kubernetes  vagrant
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision
+$ cd vagrant/
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant
+$ ls
+centos  ubuntu
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant
+$ cd ubuntu/
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$ vagrant status
+Current machine states:
+
+default                   poweroff (virtualbox)
+
+The VM is powered off. To restart the VM, simply run `vagrant up`
+
+bhara@DESKTOP-SSN6PB4  ~/devops/provision/vagrant/ubuntu
+$
+
+Microsoft Windows [Version 10.0.19045.2364]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\WINDOWS\system32>cd ~
+The system cannot find the path specified.
+
+C:\WINDOWS\system32>bash
+
+bhara@DESKTOP-SSN6PB4  /c/WINDOWS/system32
+$ cd ~
+
+bhara@DESKTOP-SSN6PB4  ~
+$ tree devops
+bash: tree: command not found
+
+bhara@DESKTOP-SSN6PB4  ~
+$ cd c:\users\bhara
+bash: cd: c:usersbhara: No such file or directory
+
+bhara@DESKTOP-SSN6PB4  ~
+$ cd c:\users
+
+bhara@DESKTOP-SSN6PB4  /c/users
+$ dir
+All\ Users  Default  Default\ User  Public  bhara  desktop.ini
+
+bhara@DESKTOP-SSN6PB4  /c/users
+$ cd bhara
+
+bhara@DESKTOP-SSN6PB4  /c/users/bhara
+$ dir
+3D\ Objects                                                                                   NetHood
+AppData                                                                                       OneDrive
+Application\ Data                                                                             PrintHood
+Contacts                                                                                      Recent
+Cookies                                                                                       Saved\ Games
+Documents                                                                                     Searches
+Downloads                                                                                     SendTo
+Favorites                                                                                     Start\ Menu
+IntelGraphicsProfiles                                                                         Templates
+Links                                                                                         Videos
+Local\ Settings                                                                               VirtualBox\ VMs
+Music                                                                                         devops
+My\ Documents                                                                                 ntuser.dat.LOG1
+NTUSER.DAT                                                                                    ntuser.dat.LOG2
+NTUSER.DAT{f709009e-89b3-11ed-9186-b469218484dc}.TM.blf                                       ntuser.ini
+NTUSER.DAT{f709009e-89b3-11ed-9186-b469218484dc}.TMContainer00000000000000000001.regtrans-ms  vagrant
+NTUSER.DAT{f709009e-89b3-11ed-9186-b469218484dc}.TMContainer00000000000000000002.regtrans-ms
+
+bhara@DESKTOP-SSN6PB4  /c/users/bhara
+$ tree devops
+bash: tree: command not found
+
+bhara@DESKTOP-SSN6PB4  /c/users/bhara
+$ exit
+exit
+
+C:\WINDOWS\system32>cd c:\users\bhara
+
+c:\Users\bhara>tree devops
+Folder PATH listing
+Volume serial number is 00000081 6000:8FE7
+C:\USERS\BHARA\DEVOPS
++---coding
+¦   +---ansible
+¦   +---chef
+¦   ¦   +---chefnode
+¦   ¦   +---chefserver
+¦   ¦   +---chefworkstation
+¦   +---puppet
+¦   ¦   +---puppetnode
+¦   ¦   +---puppetserver
+¦   +---terraform
++---provision
+¦   +---docker
+¦   +---kubernetes
+¦   +---vagrant
+¦       +---centos
+¦       ¦   +---.vagrant
+¦       ¦       +---machines
+¦       ¦       ¦   +---default
+¦       ¦       ¦       +---virtualbox
+¦       ¦       +---rgloader
+¦       +---ubuntu
+¦           +---.vagrant
+¦               +---machines
+¦               ¦   +---default
+¦               ¦       +---virtualbox
+¦               +---rgloader
++---release
+    +---git
+    +---gitlab
+    +---jenkins
+    +---nagios
+    +---tomcat
+
+c:\Users\bhara>
+
